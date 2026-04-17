@@ -1,9 +1,9 @@
-import { connectFourEnv } from "@/features/connect-four/config/env";
+import { requireConnectFourApiBaseUrl } from "@/features/connect-four/config/env";
 
 type ErrorPayload = { error?: string } | null;
 
 export async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${connectFourEnv.apiBaseUrl}${path}`, init);
+  const response = await fetch(`${requireConnectFourApiBaseUrl()}${path}`, init);
 
   if (!response.ok) {
     const payload = (await response.json().catch(() => null)) as ErrorPayload;

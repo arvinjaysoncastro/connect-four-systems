@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { connectFourEnv } from "@/features/connect-four/config/env";
+import { getConnectFourApiBaseUrl } from "@/features/connect-four/config/env";
 
 const HEALTH_PATH = "/health";
 const POLL_INTERVAL_MS = 30000;
@@ -15,9 +15,16 @@ export function useConnectivity() {
 
   const checkConnectivity = useCallback(async (): Promise<boolean> => {
     setIsChecking(true);
+    const apiBaseUrl = getConnectFourApiBaseUrl();
+
+    if (!apiBaseUrl) {
+      setActualIsOnline(false);
+      setIsChecking(false);
+      return false;
+    }
 
     try {
-      const response = await fetch(`${connectFourEnv.apiBaseUrl}${HEALTH_PATH}`, {
+      const response = await fetch(`${apiBaseUrl}${HEALTH_PATH}`, {
         method: "GET",
         cache: "no-store",
       });
