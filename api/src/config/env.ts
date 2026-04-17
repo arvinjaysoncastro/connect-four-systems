@@ -1,8 +1,9 @@
-function parsePort(value: string | undefined): number {
-  const port = Number.parseInt(value ?? "3001", 10);
+function getPort(): number {
+  const value = process.env.PORT ?? "3001"; // fallback for local
+  const port = Number.parseInt(value, 10);
 
   if (!Number.isInteger(port) || port <= 0) {
-    throw new Error("PORT must be a positive integer.");
+    throw new Error("Invalid PORT");
   }
 
   return port;
@@ -10,5 +11,5 @@ function parsePort(value: string | undefined): number {
 
 export const env = {
   corsOrigin: process.env.CORS_ORIGIN?.trim() || "*",
-  port: parsePort(process.env.PORT),
+  port: getPort()
 } as const;
