@@ -1,8 +1,9 @@
-import { Server as SocketIOServer, Socket } from "socket.io";
+import { Server } from "socket.io";
+import type { Server as SocketIOServer, Socket } from "socket.io";
 import type { Server as HTTPServer } from "http";
 
 export function createSocketServer(server: HTTPServer, corsOrigin: string) {
-  const io = new SocketIOServer(server, {
+  const io = new Server(server, {
     cors: { origin: corsOrigin },
   });
 
