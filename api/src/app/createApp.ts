@@ -1,5 +1,4 @@
 import express from "express";
-// @ts-expect-error Missing local type declarations for cors in this workspace.
 import cors from "cors";
 import type { ConnectFourServices } from "../modules/connect-four/application/createConnectFourServices.js";
 import { createConnectFourRoutes } from "../modules/connect-four/transport/http/routes.js";

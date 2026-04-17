@@ -1,4 +1,4 @@
-import { Server as SocketIOServer } from "socket.io";
+import { Server as SocketIOServer, Socket } from "socket.io";
 import type { Server as HTTPServer } from "http";
 
 export function createSocketServer(server: HTTPServer, corsOrigin: string) {
@@ -6,7 +6,7 @@ export function createSocketServer(server: HTTPServer, corsOrigin: string) {
     cors: { origin: corsOrigin },
   });
 
-  io.on("connection", (socket) => {
+  io.on("connection", (socket: Socket) => {
     socket.on("join-room", (roomId: string) => {
       socket.join(roomId);
     });
