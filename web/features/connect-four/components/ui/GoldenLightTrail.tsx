@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 interface GoldenLightTrailProps {
   gridSize?: number;
+  lightCount?: number;
   instanceId?: number;
 }
 
