@@ -31,7 +31,7 @@ export function useActiveToken({
   const [activeToken, setActiveToken] = useState<ActiveToken | null>(null);
   const [activeColumn, setActiveColumn] = useState<number | null>(null);
 
-  const boardContainerRef = useRef<HTMLDivElement | null>(null);
+  const boardContainerRef = useRef<HTMLDivElement>(null);
   const cellRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const activeTokenStyle = getActiveTokenStyle(

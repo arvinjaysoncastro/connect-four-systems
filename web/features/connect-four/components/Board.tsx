@@ -11,7 +11,7 @@ type BoardProps = {
   activeToken: ActiveToken | null;
   activeTokenStyle: CSSProperties | null;
   board: BoardType;
-  boardContainerRef: RefObject<HTMLDivElement | null>;
+  boardContainerRef: RefObject<HTMLDivElement>;
   cellDisabledStates: boolean[];
   columnCount: number;
   onCellClick: (column: number) => void | Promise<void>;
