@@ -1,0 +1,22 @@
+import { Server as SocketIOServer } from "socket.io";
+import type { Server as HTTPServer } from "http";
+
+export function createSocketServer(server: HTTPServer, corsOrigin: string) {
+  const io = new SocketIOServer(server, {
+    cors: { origin: corsOrigin },
+  });
+
+  io.on("connection", (socket) => {
+    socket.on("join-room", (roomId: string) => {
+      socket.join(roomId);
+    });
+
+    socket.on("leave-room", (roomId: string) => {
+      socket.leave(roomId);
+    });
+  });
+
+  return io;
+}
+
+export type GameSocketServer = SocketIOServer;
