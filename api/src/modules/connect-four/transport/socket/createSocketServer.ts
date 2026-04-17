@@ -1,5 +1,4 @@
 import { Server } from "socket.io";
-import type { Server as SocketIOServer, Socket } from "socket.io";
 import type { Server as HTTPServer } from "http";
 
 export function createSocketServer(server: HTTPServer, corsOrigin: string) {
@@ -7,7 +6,7 @@ export function createSocketServer(server: HTTPServer, corsOrigin: string) {
     cors: { origin: corsOrigin },
   });
 
-  io.on("connection", (socket: Socket) => {
+  io.on("connection", (socket: any) => {
     socket.on("join-room", (roomId: string) => {
       socket.join(roomId);
     });
@@ -20,4 +19,4 @@ export function createSocketServer(server: HTTPServer, corsOrigin: string) {
   return io;
 }
 
-export type GameSocketServer = SocketIOServer;
+export type GameSocketServer = ReturnType<typeof createSocketServer>;
